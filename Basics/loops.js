@@ -119,3 +119,105 @@ function reverseNumber(n) {
     }
     return rev
 }
+
+
+
+class Solution {
+
+
+    checkHarshad(n) {
+
+        let sum = 0
+        let temp = n
+
+        while (temp > 0) {
+            let d = temp % 10
+            sum += d
+            temp = Math.floor(temp / 10)
+        }
+        return (n !== 0 && n % sum === 0) ? "Harshad Number" : "Not Harshad Number"
+
+    }
+
+}
+
+class Solution {
+
+    checkAbundant(n) {
+        let sum = 0
+
+        for (let i = 1; i <= n / 2; i++) {
+            if (n % i === 0) {
+                sum += i
+                if (sum > n) return "Yes"
+            }
+        }
+        return (sum > n) ? "Yes" : "No"
+
+    }
+
+}
+
+
+class Solution {
+
+    primeFactors(n) {
+        if (n <= 1) return "No prime factors";
+
+        let result = [];
+
+        for (let i = 2; i * i <= n; i++) {
+            while (n % i === 0) {
+                result.push(i);
+                n /= i;
+            }
+        }
+
+        if (n > 1) {
+            result.push(n);
+        }
+
+        return result.join(" ");
+    }
+
+}
+
+class Solution {
+
+    checkNeon(n) {
+
+        let sum = 0
+        let square = n * n
+        while ((square) > 0) {
+            let d = (square) % 10
+            sum += d
+            if (sum > n) return "No"
+            square = Math.floor(square / 10)
+        }
+
+        return (sum === n) ? "Yes" : "No"
+
+    }
+
+}
+
+
+
+class Solution {
+
+    checkArmstrong(n) {
+
+        let l = String(n).length
+        let temp = n
+        let sum = 0
+        while (temp > 0) {
+            let d = temp % 10
+            sum += Math.pow(d, l)
+            temp = Math.floor(temp / 10)
+        }
+
+        return (sum === n) ? "Armstrong" : "Not Armstrong"
+
+    }
+
+}
