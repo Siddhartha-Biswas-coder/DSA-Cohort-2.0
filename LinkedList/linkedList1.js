@@ -15,6 +15,7 @@ class LL {
     let newNode = new Node(val);
     if (this.head == null) {
       this.head = newNode;
+      this.size++;
       return;
     }
 
@@ -27,6 +28,7 @@ class LL {
     let newNode = new Node(val);
     if (this.head == null) {
       this.head = newNode;
+      this.size++;
       return;
     }
 
@@ -39,6 +41,31 @@ class LL {
     temp.next = newNode;
   }
 
+  insertAtIndex(index, val) {
+    if (index < 1 || index > this.size + 1) {
+      console.log("Invalid Index");
+      return;
+    }
+    
+    if (index === 1) {
+      this.insertAtFirst(val);
+      return;
+    }
+
+    let newNode = new Node(val);
+
+    let count = 1;
+    let temp = this.head;
+    while (count < index - 1) {
+      temp = temp.next;
+      count++;
+    }
+
+    this.size++;
+    newNode.next = temp.next;
+    temp.next = newNode;
+  }
+
   deleteAtFirst() {
     if (this.head === null) {
       console.log("Empty Linked List");
@@ -48,6 +75,28 @@ class LL {
     let deleteNode = this.head;
     this.head = deleteNode.next;
     deleteNode.next = null;
+  }
+
+  deleteAtLast() {
+    if (this.head === null) {
+      console.log("Empty Linked List");
+      return;
+    }
+
+    if (this.head.next === null) {
+      this.head = null;
+      this.size--;
+      return;
+    }
+
+    let temp = this.head;
+
+    while (temp.next.next !== null) {
+      temp = temp.next;
+    }
+
+    temp.next = null;
+    this.size--;
   }
 
   deleteAtValue(val) {
@@ -86,7 +135,7 @@ class LL {
     }
     let temp = this.head;
     while (temp != null) {
-      process.stdout.write(temp.data + " ");
+      process.stdout.write(temp.data + " -> ");
       temp = temp.next;
     }
     console.log("null");
@@ -109,4 +158,8 @@ obj.printLL();
 obj.deleteAtValue(-10);
 obj.printLL();
 obj.deleteAtFirst();
+obj.printLL();
+obj.deleteAtLast();
+obj.printLL();
+obj.insertAtIndex(6, -5);
 obj.printLL();
