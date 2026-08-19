@@ -52,28 +52,55 @@ class minHeap {
       i = small;
     }
   }
+
+  heapify(arr, i, size) {
+    let small = i,
+      left = 2 * i + 1,
+      right = 2 * i + 2;
+    if (left < size && arr[small] > arr[left]) {
+      small = left;
+    }
+    if (right < size && arr[small] > arr[right]) {
+      small = right;
+    }
+    if (small != i) {
+      swap(arr, i, small);
+      this.heapify(arr, small, size);
+    }
+  }
 }
 
 function swap(arr, i, j) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
 }
 
 let obj = new minHeap();
-obj.insertion(50);
-obj.insertion(10);
-obj.insertion(400);
-obj.insertion(50);
-obj.insertion(15);
-obj.insertion(30);
+// obj.insertion(50);
+// obj.insertion(10);
+// obj.insertion(400);
+// obj.insertion(50);
+// obj.insertion(15);
+// obj.insertion(30);
 
-console.log(obj.heap);
+// console.log(obj.heap);
 
-obj.deletion();
+// obj.deletion();
 
-console.log(obj.heap);
+// console.log(obj.heap);
 
-obj.deletion();
+// obj.deletion();
 
-console.log(obj.heap);
+// console.log(obj.heap);
+
+let arr = [60, 15, 18, 45, 22, 9];
+let size = arr.length;
+for (let i = Math.floor(size / 2) - 1; i >= 0; i--) {
+  obj.heapify(arr, i, size);
+}
+
+for (let i = size - 1; i >= 0; i--) {
+  swap(arr, 0, i);
+  obj.heapify(arr, 0, i);
+}
+
+console.log(arr);
